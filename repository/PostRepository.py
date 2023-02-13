@@ -23,6 +23,12 @@ class PostRepository:
 
   def get_oldest_post(self) -> Post:
     payload = {
+      "filter": {
+        "property": "status",
+        "status": {
+          "equals": "Not started"
+        }
+      },
       "sorts": [{
         "property": "created_dts",
         "direction": "ascending"
@@ -38,3 +44,4 @@ if __name__ == "__main__":
   post_repo = PostRepository()
   for aa in post_repo.find_all(dict()):
     print(aa)
+  print(post_repo.get_oldest_post())

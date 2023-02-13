@@ -17,16 +17,14 @@ class PublishPostService:
   def publish_post(self, post: Post):
     category: Category = self.tistory_connector.get_category_by_topic_name(post.topic)
     write_page = Page(post.title, post.body, 3, category.id, "tag")
-    self.tistory_connector.write(write_page)
+    status_code = self.tistory_connector.write(write_page)
 
-    # 정상적으로 발행이 되면
-
-    post.status = "Published"
+    post.status = "Published" if status_code == 200 else "Error"
     post.published_dts = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f%z")
     self.post_repository.update_row(post)
 
     topic = self.topic_repository.find_by_topic_name(post.topic)
-    topic.published_count += 1
+    topic.published_count += 1 if status_code == 200 else 0
     self.topic_repository.update_row(topic)
 
 

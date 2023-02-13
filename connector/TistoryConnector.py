@@ -37,7 +37,7 @@ class TistoryConnector:
       "tag": write_page.tag
     }
     reseponse = post(url, data=json.dumps(payload))
-    print(reseponse.json())
+    return reseponse.status_code
 
 
 if __name__ == "__main__":
