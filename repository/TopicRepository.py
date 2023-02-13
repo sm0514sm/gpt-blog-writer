@@ -11,7 +11,7 @@ class TopicRepository:
 
   def find_all(self) -> List[Topic]:
     results = self.connector.get_all_row_from_database(self.database_id, dict())
-    return [self.map_to_image_database_row(result) for result in results]
+    return [Topic.map_to_image_database_row(result) for result in results]
 
   def update_row(self, row: Topic):
     payload = {
@@ -21,18 +21,6 @@ class TopicRepository:
         "use": {"checkbox": row.use},
       }}
     self.connector.update_page(row.id, payload)
-
-  @staticmethod
-  def map_to_image_database_row(result) -> Topic:
-    properties = result['properties']
-
-    return Topic(
-      _id=result['id'],
-      use=properties['use']['checkbox'],
-      topic_name=properties['topic_name']['title'][0]['plain_text'].strip(),
-      published_count=0 if properties['published_count']['number'] is None else properties['published_count']['number'],
-      created_count=0 if properties['created_count']['number'] is None else properties['created_count']['number'],
-    )
 
   def get_smallest_created_count_topic(self) -> Topic:
     self.find_all()

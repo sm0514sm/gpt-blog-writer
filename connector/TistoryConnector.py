@@ -12,7 +12,7 @@ class TistoryConnector:
     url = "https://www.tistory.com/apis/category/list"
     params = {'access_token': self.access_token, "output": "json", "blogName": "lifaon"}
     response = get(url, params=params)
-    print(response)
+    print(response.json()['tistory']['item']['categories'])
 
 
 if __name__ == "__main__":
