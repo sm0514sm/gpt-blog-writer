@@ -9,27 +9,40 @@ class TopicRepository:
     self.connector = NotionConnector()
     self.database_id = "57120f6893604b61b8bb4ba3ccd44533"
 
-  def find_all(self) -> List[Topic]:
-    results = self.connector.get_all_row_from_database(self.database_id, dict())
-    return [Topic.map_to_image_database_row(result) for result in results]
+  def find_all(self, payload) -> List[Topic]:
+    results = self.connector.get_all_row_from_database(self.database_id, payload)
+    return [Topic.map_to_topic(result) for result in results]
 
   def update_row(self, row: Topic):
-    payload = {
-      "properties": {
-        "published_count": {"number": int(row.published_count)},
-        "created_count": {"number": int(row.created_count)},
-        "use": {"checkbox": row.use},
-      }}
-    self.connector.update_page(row.id, payload)
+    self.connector.update_page(row.id, row.map_to_notion())
+
+  def find_by_topic_name(self, topic_name) -> Topic:
+    for topic in self.find_all(dict()):
+      if topic.topic_name == topic_name:
+        return topic
 
   def get_smallest_created_count_topic(self) -> Topic:
-    self.find_all()
-    # TODO 뭐 use로 필터를 해야함
-    # TODO 뭐 count 순으로 오름차순 정렬을 해야함
-    # TODO return 가장 작은 수의 토픽
+    payload = {
+      "filter": {
+        "property": "use",
+        "checkbox": {
+          "equals": True
+        }
+      },
+      "sorts": [{
+        "property": "created_count",
+        "direction": "ascending"
+      }]
+    }
+    topics = self.find_all(payload)
+    if not topics or len(topics) == 0:
+      raise Exception("토픽이 존재하지 않음")
+    return topics[0]
+
+  def increate_created_count(self, topic) -> None:
+    self.connector.update_page(topic.id, dict())
 
 
 if __name__ == "__main__":
-  topics = TopicRepository()
-  for i in topics.find_all():
-    print(i)
+  topicRepo = TopicRepository()
+  print(topicRepo.get_smallest_created_count_topic())

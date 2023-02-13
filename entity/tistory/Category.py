@@ -6,6 +6,15 @@ class Category:
     self.label: str = label
     self.entries: str = entries
 
+  def __repr__(self):
+    return f"Category={{{self.id=}, {self.name=}, {self.parent=}, {self.label=} {self.entries=}}}"
 
-def __str__(self):
-  return f"{self.id=}, {self.name=}, {self.parent=}, {self.label=} {self.entries=}"
+  @staticmethod
+  def map_to_category(result):
+    return Category(
+      _id=result['id'],
+      name=result['name'],
+      parent=result['parent'],
+      label=result['label'],
+      entries=result['entries']
+    )

@@ -1,9 +1,11 @@
+import os
+
 import openai
 
 
 class ChatGptConnector:
   def __init__(self):
-    self.api_key = "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"
+    self.api_key = os.environ.get("chat_gpt_api_key")
 
   def create(self, model="text-davinci-003", prompt="", temperature=0.7, max_tokens=3900,
              top_p=1, frequency_penalty=0, presence_penalty=0):

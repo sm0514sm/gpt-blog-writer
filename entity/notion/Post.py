@@ -13,7 +13,7 @@ class Post:
     self.post_id: str = post_id
 
   def __str__(self):
-    return f"{self.id=}, {self.title=}, {self.topic=}, {self.status=}, {self.created_dts}, {self.published_dts}"
+    return f"Post={{{self.id=}, {self.title=}, {self.topic=}, {self.status=}, {self.created_dts}, {self.published_dts}}}"
 
   @staticmethod
   def map_to_post(result):

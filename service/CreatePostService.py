@@ -31,7 +31,9 @@ class CreatePostService:
     body = self.gpt_connector.get_one_answer(prompt=self.get_prompt(topic.topic_name))
     post = Post(None, body.split("\n\n")[0], topic.topic_name, "Not started", body, "", "", "")
     self.post_repository.create_row(post)
-    # TODO topic created_count 업데이트
+    # 성공하면
+    topic.created_count += 1
+    self.topic_repository.update_row(topic)
 
 
 if __name__ == "__main__":

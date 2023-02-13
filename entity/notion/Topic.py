@@ -7,7 +7,7 @@ class Topic:
     self.created_count: int = created_count
 
   def __str__(self):
-    return f"{self.id=}, {self.use=}, {self.topic_name=}, {self.published_count=} {self.created_count=}"
+    return f"Topic={{{self.id=}, {self.use=}, {self.topic_name=}, {self.published_count=} {self.created_count=}}}"
 
   @staticmethod
   def map_to_topic(result):
@@ -20,3 +20,13 @@ class Topic:
       published_count=0 if properties['published_count']['number'] is None else properties['published_count']['number'],
       created_count=0 if properties['created_count']['number'] is None else properties['created_count']['number'],
     )
+
+  def map_to_notion(self) -> dict:
+    return {
+      "properties": {
+        "use": {"checkbox": self.use},
+        "topic_name": {"title": [{"text": {"content": self.topic_name}}]},
+        "published_count": {"number": self.published_count},
+        "created_count": {"number": self.created_count}
+      }
+    }
