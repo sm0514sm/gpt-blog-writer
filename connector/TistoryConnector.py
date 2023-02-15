@@ -9,7 +9,7 @@ from entity.tistory.Page import Page
 
 class TistoryConnector:
   def __init__(self):
-    self.access_token = os.environ.get("tistory_access_token")
+    self.access_token = os.environ.get("TISTORY_ACCESS_TOKEN")
     self.blogName = "lifaon"
 
   def get_categories(self) -> list[Category]:

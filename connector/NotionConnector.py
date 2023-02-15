@@ -6,7 +6,7 @@ from requests import post, patch, get
 
 class NotionConnector:
   def __init__(self):
-    self.token = os.environ.get("notion_token")
+    self.token = os.environ.get("NOTION_TOKEN")
     self.hdr = {
       "Authorization": f"Bearer {self.token}",
       "Notion-Version": "2021-08-16",
