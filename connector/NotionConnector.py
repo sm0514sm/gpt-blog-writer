@@ -19,6 +19,7 @@ class NotionConnector:
     result_list = []
     while True:
       result_dict = post(url, headers=self.hdr, json=datas).json()
+      print(result_dict)
       result_list += result_dict['results']
 
       if not result_dict['has_more']:
