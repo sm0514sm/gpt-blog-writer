@@ -6,7 +6,7 @@ setup(
   packages=find_packages(
     include=['connector', 'connector.*', 'entity', 'entity.*', 'repository', 'repository.*', 'service', 'service.*']),
   install_requires=[
-    'aiohttp==3.8.4'
+    'aiohttp==3.8.4',
     'aiosignal==1.3.1',
     'async-timeout==4.0.2',
     'attrs==22.2.0',
