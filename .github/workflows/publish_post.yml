@@ -34,7 +34,7 @@ jobs:
         echo "TISTORY_ACCESS_TOKEN=$TISTORY_ACCESS_TOKEN" >> .env
         echo "NOTION_TOKEN=$NOTION_TOKEN" >> .env
         echo "CHAT_GPT_API_KEY=$CHAT_GPT_API_KEY" >> .env
-        env:
+      env:
          TISTORY_ACCESS_TOKEN: ${{secrets.TISTORY_ACCESS_TOKEN}}
          NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}
          CHAT_GPT_API_KEY: ${{secrets.CHAT_GPT_API_KEY}}
