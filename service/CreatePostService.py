@@ -16,18 +16,19 @@ class CreatePostService:
   @staticmethod
   def get_prompt(topic_name):
     return f"Create a title related to topic \"{topic_name}\", and write about it with the options below." \
-           f"- Length : Length : around 3500 words" \
+           f"- Length : Length : around 3000 words" \
            f"- Format: html" \
            f"- Answer me in English" \
            f"- include titles, subtitles and detail description" \
            f"- Content goal (작성 목적) : blog" \
            f"- hashtag consist only of ',' and no spaces and no '#' and format as \"###Hashtags4U: Hashtags to write\"." \
            f"" \
-           f"you can add images to the reply by Markdown, " \
+           f"you can add images to the reply by html tags, " \
            f"Write the image in html without using a code block. " \
            f'Use the Unsplash API like this: <img src="https://source.unsplash.com/1600x900/?" alt="?">' \
-           f"the query is just some tags that describes the image]" \
-           f"You should add at least two image!!"
+           f"the query is just some tags that describes the image" \
+           f"You should add at least two image!!" \
+           f"Put the image tag in the middle of the sentence."
 
   def create_post_from_topic(self, topic: Topic):
     body = self.gpt_connector.get_one_answer(prompt=self.get_prompt(topic.topic_name))
