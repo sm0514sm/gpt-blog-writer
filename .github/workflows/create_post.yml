@@ -6,6 +6,12 @@ name: Create Post
 on:
   schedule:
   - cron: 0 * * * *
+  workflow_dispatch:
+    inputs:
+      greeting:
+        required: false
+        default: 'Hello'
+        type: string
 
 jobs:
   build:
