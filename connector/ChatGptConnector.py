@@ -8,7 +8,7 @@ class ChatGptConnector:
     self.api_key = os.environ.get("CHAT_GPT_API_KEY")
 
   def create(self, model="text-davinci-003", prompt="", temperature=0.7, max_tokens=3900,
-             top_p=1, frequency_penalty=0, presence_penalty=0):
+             top_p=0.7, frequency_penalty=0.1, presence_penalty=0.3):
     openai.api_key = self.api_key
     return openai.Completion.create(model=model,
                                     prompt=prompt,
@@ -19,7 +19,7 @@ class ChatGptConnector:
                                     presence_penalty=presence_penalty)
 
   def get_one_answer(self, model="text-davinci-003", prompt="", temperature=0.5, max_tokens=3500,
-                     top_p=1, frequency_penalty=0, presence_penalty=0) -> str:
+                     top_p=0.7, frequency_penalty=0.1, presence_penalty=0) -> str:
     return self.create(model=model,
                        prompt=prompt,
                        temperature=temperature,

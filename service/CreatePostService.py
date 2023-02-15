@@ -22,13 +22,10 @@ class CreatePostService:
            f"- include titles, subtitles and detail description" \
            f"- Content goal (작성 목적) : blog" \
            f"- hashtag consist only of ',' and no spaces and no '#' and format as \"###Hashtags4U: Hashtags to write\"." \
-           f"" \
+           f"- Minimum number of img tags: 2" \
            f"you can add images to the reply by html tags, " \
-           f"Write the image in html without using a code block. " \
            f'Use the Unsplash API like this: <img src="https://source.unsplash.com/1600x900/?" alt="?">' \
-           f"the query is just some tags that describes the image" \
-           f"You should add at least two image!!" \
-           f"Put the image tag in the middle of the sentence."
+           f"the query is just some tags that describes the image"
 
   def create_post_from_topic(self, topic: Topic):
     body = self.gpt_connector.get_one_answer(prompt=self.get_prompt(topic.topic_name))
