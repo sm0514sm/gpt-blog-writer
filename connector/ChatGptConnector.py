@@ -34,8 +34,8 @@ if __name__ == "__main__":
   topic = "Home improvement and DIY"
   test_prompt = f"Create a title related to topic {topic}, and write about it with the options below." \
                 f"- Length : Length : around 3000 words" \
-                f"- Format: markdown" \
-                f"- Answer me in English" \
+                f"- Format: html" \
+                f"- Answer me in Korean" \
                 f"- include titles" \
                 f"- include subtitles and detail description" \
                 f"- For audience (대상) : a person of interest in {topic}" \

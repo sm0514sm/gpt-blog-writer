@@ -29,15 +29,17 @@ class NotionConnector:
   def create_page(self, payload):
     url = f'https://api.notion.com/v1/pages'
     reseponse = post(url, headers=self.hdr, data=json.dumps(payload))
+    print(f"create_page: {reseponse.json()}")
 
   def update_page(self, page_id, payload):
     url = f'https://api.notion.com/v1/pages/{page_id}'
     reseponse = patch(url, headers=self.hdr, data=json.dumps(payload))
+    print(f"update_page: {reseponse.json()}")
 
   def get_page(self, page_id):
     url = f'https://api.notion.com/v1/pages/{page_id}'
     reseponse = get(url, headers=self.hdr)
-    print(reseponse)
+    print(f"get_page: {reseponse.json()}")
 
 
 if __name__ == "__main__":

@@ -34,10 +34,10 @@ class TistoryConnector:
       "content": write_page.content,
       "visibility": write_page.visibility,
       "category": write_page.category,
-      "tag": write_page.tag
+      "tag": write_page.tag,
+      "output": "json"
     }
-    reseponse = post(url, data=json.dumps(payload))
-    return reseponse.status_code
+    return post(url, params=payload)
 
 
 if __name__ == "__main__":
