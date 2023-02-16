@@ -19,13 +19,16 @@ class CreatePostService:
            f"- Length : Length : around 3000 words" \
            f"- Format: html" \
            f"- Answer me in English" \
-           f"- include titles, subtitles and detail description" \
            f"- Content goal (작성 목적) : blog" \
-           f"- hashtag consist only of ',' and no spaces and no '#' and format as \"###Hashtags4U: Hashtags to write\"." \
-           f"- Minimum number of img tags: 2" \
-           f"you can add images to the reply by html tags, " \
-           f'Use the Unsplash API like this: <img src="https://source.unsplash.com/1600x900/?" alt="?">' \
-           f"the query is just some tags that describes the image"
+           f"- Include title, subtitles and detail description" \
+           f"- The first line should contain the title." \
+           f"- The title is formatted as follows TITLE: write title here" \
+           f'- Use the Unsplash API like this: <img src="https://source.unsplash.com/1600x900/?" alt="?">' \
+           f'- ( After the "?", you can put a representative word from the sentence. ) ' \
+           f'- The second line should contain <img>.' \
+           f'- You can add additional <img> if you need to.' \
+           f"- The last line should contain the hashtags." \
+           f"- Hashtags are formatted as follows HASHTAG: tag1,tag2,..."
 
   def create_post_from_topic(self, topic: Topic):
     body = self.gpt_connector.get_one_answer(prompt=self.get_prompt(topic.topic_name))
@@ -35,7 +38,7 @@ class CreatePostService:
       title=self.refine_title(body),
       topic=topic.topic_name,
       status="Not started",
-      body=html_body,
+      body='\n'.join(html_body.split("\n")[1:-1]),
       post_id="",
       created_dts="",
       published_dts="",
@@ -48,17 +51,18 @@ class CreatePostService:
 
   @staticmethod
   def refine_title(body):
-    return body.split("\n\n")[0].replace("#", "")\
+    return body.split("\n")[0].replace("TITLE: ", "")\
       .replace("<h1>", "").replace("</h1>", "")\
       .strip()
 
   @staticmethod
   def refine_tags(body):
-    return ",".join(
-      body.split("Hashtags4U: ")[-1].replace("#", "").replace(".", "").replace("Hashtags4U: ", "").replace(" ", "")
-      .replace("<h3>", "").replace("</h3>", "")
+    tags = ",".join(
+      body.split("HASHTAG: ")[-1].replace("#", ",").replace(".", "").replace(",,", ",").replace(" ", "")
+      .replace("<h3>", "").replace("</h3>", "").replace("<p>", "").replace("</p>", "")
       .strip().split(",")
     )
+    return tags[1:] if tags.startswith(",") else tags
 
 
 if __name__ == "__main__":
