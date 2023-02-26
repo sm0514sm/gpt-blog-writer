@@ -18,7 +18,7 @@ class ChatGptConnector:
                                     frequency_penalty=frequency_penalty,
                                     presence_penalty=presence_penalty)
 
-  def get_one_answer(self, model="text-davinci-003", prompt="", temperature=0.5, max_tokens=3500,
+  def get_one_answer(self, model="text-davinci-003", prompt="", temperature=0.5, max_tokens=3800,
                      top_p=0.7, frequency_penalty=0.1, presence_penalty=0) -> str:
     return self.create(model=model,
                        prompt=prompt,

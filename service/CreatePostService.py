@@ -16,7 +16,7 @@ class CreatePostService:
   @staticmethod
   def get_prompt(topic_name):
     return f"Create a title related to topic \"{topic_name}\", and write about it with the options below." \
-           f"- Length : Length : around 3500 words" \
+           f"- Length : Length : around 3800 words" \
            f"- Format: html" \
            f"- Answer me in English" \
            f"- Content goal: blog" \
