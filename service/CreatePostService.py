@@ -20,9 +20,9 @@ class CreatePostService:
            f"- Format: html" \
            f"- Answer me in English" \
            f"- Content goal: blog" \
-           f"- Include title, subtitles and detail description" \
            f"- The first line should contain the title." \
            f"- The title is formatted as follows TITLE: write title here" \
+           f"- Then use subheadings to categorize and explain.
            f'- Use the Unsplash API like this: <img src="https://source.unsplash.com/1600x900/?" alt="?">' \
            f'- ( After the "?", you can put a representative word from the sentence. ) ' \
            f'- The second line should contain <img>.' \
