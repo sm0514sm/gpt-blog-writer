@@ -44,7 +44,7 @@ class Post:
         "topic": {"select": {"name": self.topic}},
         "status": {"status": {"name": self.status}},
         "body": {"rich_text": self.make_long_rich_text(self.body)},
-        "published_dts": {"date": {"start": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f%z")}},
+        "published_dts": {"date": {"start": self.published_dts}},
         "post_id": {"rich_text": [{"text": {"content": self.post_id}}]},
         "tags": {"rich_text": [{"text": {"content": self.tags}}]}
       }
