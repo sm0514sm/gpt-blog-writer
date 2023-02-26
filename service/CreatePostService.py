@@ -16,10 +16,10 @@ class CreatePostService:
   @staticmethod
   def get_prompt(topic_name):
     return f"Create a title related to topic \"{topic_name}\", and write about it with the options below." \
-           f"- Length : Length : around 3000 words" \
+           f"- Length : Length : around 3500 words" \
            f"- Format: html" \
            f"- Answer me in English" \
-           f"- Content goal (작성 목적) : blog" \
+           f"- Content goal: blog" \
            f"- Include title, subtitles and detail description" \
            f"- The first line should contain the title." \
            f"- The title is formatted as follows TITLE: write title here" \
