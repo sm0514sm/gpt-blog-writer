@@ -22,7 +22,7 @@ class CreatePostService:
            f"- Content goal: blog" \
            f"- The first line should contain the title." \
            f"- The title is formatted as follows TITLE: write title here" \
-           f"- Then use subheadings to categorize and explain." \
+           f"- Then use subheadings using <h2> tags to categorise and explain." \
            f'- Use the Unsplash API like this: <img src="https://source.unsplash.com/1600x900/?" alt="?">' \
            f'- ( After the "?", you can put a representative word from the sentence. ) ' \
            f'- The second line should contain <img>.' \
@@ -41,7 +41,7 @@ class CreatePostService:
       body='\n'.join(html_body.split("\n")[1:-1]),
       post_id="",
       created_dts="",
-      published_dts="",
+      published_dts=None,
       tags=self.refine_tags(body)
     )
     self.post_repository.create_row(post)
