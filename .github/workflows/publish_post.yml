@@ -4,8 +4,8 @@
 name: Publish Post
 
 on:
-  schedule:
-  - cron: 10 0-15 * * *
+  #schedule:
+  #- cron: 10 0-15 * * *
   workflow_dispatch:
     inputs:
       greeting:
