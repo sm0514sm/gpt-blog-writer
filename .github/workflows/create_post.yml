@@ -4,8 +4,8 @@
 name: Create Post
 
 on:
-  schedule:
-  - cron: 0 0-15 * * *
+  #schedule:
+  #- cron: 0 0-15 * * *
   workflow_dispatch:
     inputs:
       greeting:
